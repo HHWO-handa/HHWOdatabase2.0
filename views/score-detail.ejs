@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | HHWO Database</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a href="/">🎵 HHWO Database</a>
+                </div>
+                <ul class="navbar-menu">
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/scores">楽譜管理</a></li>
+                    <li><a href="/instruments">楽器管理</a></li>
+                    <li><a href="/protected/login">管理パネル</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="detail-header">
+            <h1><%= score.title %></h1>
+            <div class="detail-actions">
+                <a href="/scores/<%= score.id %>/edit" class="btn btn-warning">編集</a>
+                <form method="POST" action="/scores/<%= score.id %>/delete" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('削除してもよろしいですか？')">削除</button>
+                </form>
+                <a href="/scores" class="btn btn-secondary">一覧に戻る</a>
+            </div>
+        </div>
+
+        <div class="detail-content">
+            <dl>
+                <dt>作曲者</dt>
+                <dd><%= score.composer || '不明' %></dd>
+
+                <dt>ジャンル</dt>
+                <dd><%= score.genre || '-' %></dd>
+
+                <dt>難易度</dt>
+                <dd><%= score.difficulty || '-' %></dd>
+
+                <dt>説明</dt>
+                <dd><%= score.description || 'なし' %></dd>
+
+                <dt>登録日時</dt>
+                <dd><%= new Date(score.created_at).toLocaleString('ja-JP') %></dd>
+
+                <dt>更新日時</dt>
+                <dd><%= new Date(score.updated_at).toLocaleString('ja-JP') %></dd>
+            </dl>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HHWO Database. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
