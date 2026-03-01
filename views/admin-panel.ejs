@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理パネル | HHWO Database</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a href="/">🎵 HHWO Database</a>
+                </div>
+                <ul class="navbar-menu">
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/scores">楽譜管理</a></li>
+                    <li><a href="/instruments">楽器管理</a></li>
+                    <li><a href="/protected/logout" class="btn btn-small">ログアウト</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="admin-header">
+            <h1>🔐 管理パネル</h1>
+            <p>管理者メニューへようこそ</p>
+        </div>
+
+        <section class="admin-section">
+            <h2>管理機能</h2>
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3>���� 楽譜管理</h3>
+                    <p>楽譜情報の追加・編集・削除</p>
+                    <a href="/scores" class="btn btn-primary">楽譜管理へ</a>
+                </div>
+
+                <div class="admin-card">
+                    <h3>🎸 楽器管理</h3>
+                    <p>楽器情報の追加・編集・削除</p>
+                    <a href="/instruments" class="btn btn-primary">楽器管理へ</a>
+                </div>
+
+                <div class="admin-card">
+                    <h3>📊 統計情報</h3>
+                    <p>登録情報の統計表示</p>
+                    <a href="/protected/stats" class="btn btn-primary">統計情報</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HHWO Database. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
