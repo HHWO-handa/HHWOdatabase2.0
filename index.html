@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音楽ライブラリ管理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">♪</span>
+        <span class="logo-text">Music Library</span>
+      </div>
+      <button class="admin-btn" id="adminBtn">管理者</button>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main">
+
+    <!-- ページタイトルエリア -->
+    <div class="page-title-area">
+      <h1 class="page-title" id="pageTitle">楽器一覧</h1>
+      <p class="page-subtitle" id="pageSubtitle">登録された楽器を管理します</p>
+    </div>
+
+    <!-- 検索バー -->
+    <div class="search-area">
+      <input type="text" class="search-input" id="searchInput" placeholder="検索...">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <!-- テーブルコンテナ -->
+    <div class="table-container" id="tableContainer">
+      <!-- JSで動的生成 -->
+    </div>
+
+    <!-- 空状態 -->
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="empty-icon">📭</div>
+      <p>データがありません</p>
+    </div>
+
+  </main>
+
+  <!-- ボトムナビゲーション -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="instruments" onclick="switchPage('instruments')">
+      <span class="nav-icon">🎷</span>
+      <span class="nav-label">楽器一覧</span>
+    </button>
+    <button class="nav-btn" data-page="scores" onclick="switchPage('scores')">
+      <span class="nav-icon">🎵</span>
+      <span class="nav-label">楽譜一覧</span>
+    </button>
+    <button class="nav-btn" data-page="repair" onclick="switchPage('repair')">
+      <span class="nav-icon">🔧</span>
+      <span class="nav-label">修理楽器</span>
+    </button>
+    <button class="nav-btn" data-page="baseball" onclick="switchPage('baseball')">
+      <span class="nav-icon">⚾</span>
+      <span class="nav-label">応援楽譜</span>
+    </button>
+  </nav>
+
+  <!-- 詳細モーダル -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- 管理者認証モーダル -->
+  <div class="modal-overlay" id="authOverlay">
+    <div class="modal auth-modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeAuth()">✕</button>
+      <div class="auth-content">
+        <div class="auth-icon">🔒</div>
+        <h2 class="auth-title">管理者認証</h2>
+        <p class="auth-desc">パスワードを入力してください</p>
+        <input type="password" class="auth-input" id="authInput" placeholder="パスワード" onkeydown="if(event.key==='Enter')checkAuth()">
+        <p class="auth-error" id="authError"></p>
+        <button class="auth-submit" onclick="checkAuth()">ログイン</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 管理者パネル -->
+  <div class="modal-overlay" id="adminPanelOverlay">
+    <div class="modal admin-modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeAdminPanel()">✕</button>
+      <div class="admin-content" id="adminContent"></div>
+    </div>
+  </div>
+
+  <!-- 追加/編集フォームモーダル -->
+  <div class="modal-overlay" id="formOverlay">
+    <div class="modal form-modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeForm()">✕</button>
+      <div class="form-content" id="formContent"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
