@@ -18,5 +18,16 @@ const ADMIN_PASSWORD = 'hhwo2026'; // ← ここを変更してください
 // ============================================================
 // Supabase Storage バケット名
 // ============================================================
-const STORAGE_IMAGE_BUCKET = 'instrument-images';
+const STORAGE_IMAGE_BUCKET  = 'instrument-images';
 const STORAGE_REPAIR_BUCKET = 'repair-photos';
+
+// ============================================================
+// リンク集（config.jsを直接編集して追加・変更してください）
+// ============================================================
+const LINKS = [
+  { label: 'Supabase ダッシュボード', url: 'https://supabase.com/dashboard', icon: '🗄️' },
+  { label: 'GitHub リポジトリ',       url: 'https://github.com/',             icon: '💻' },
+  { label: '吹奏楽連盟',              url: 'https://www.ajba.or.jp/',         icon: '🎺' },
+  // ← ここにリンクを追加してください
+  // 例: { label: '楽器店サイト', url: 'https://example.com', icon: '🎸' },
+];
