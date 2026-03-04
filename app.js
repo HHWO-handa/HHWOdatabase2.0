@@ -604,7 +604,7 @@ function instrumentForm(item) {
     </div>
 
     <div class="form-group">
-      <label class="form-label required">楽器名 <span style="font-size:11px;font-weight:400;color:var(--text-muted)">（楽器番号+楽器コードから自動生成）</span></label>
+      <label class="form-label required">楽器名 <span style="font-size:11px;font-weight:400;color:var(--text-muted)"></span></label>
       <input type="text" class="form-input" id="f_name" value="${v('name')}"
         placeholder="楽器番号とコード入力で自動入力されます">
     </div>
@@ -733,7 +733,7 @@ function updateInstnumberPreview() {
 function updateInstName() {
   const instNum = getInstnumberValue();
   const instcode = (document.getElementById('f_instcode')?.value || '').trim();
-  const nameField = document.getElementById('f_name');
+  const nameField = document.getElementById('f_qr');
   if (!nameField) return;
   const numStr = instNum !== null ? String(instNum).padStart(6, '0') : '';
   if (numStr || instcode) {
