@@ -25,8 +25,8 @@ const STORAGE_REPAIR_BUCKET = 'repair-photos';
 // リンク集（config.jsを直接編集して追加・変更してください）
 // ============================================================
 const LINKS = [
-  { label: 'Supabase ダッシュボード', url: 'https://supabase.com/dashboard', icon: '🗄️' },
-  { label: 'GitHub リポジトリ',       url: 'https://github.com/',             icon: '💻' },
+  { label: 'HHWOホームページ', url: 'https://hhwo2023.1web.jp/', icon: '' },
+  { label: '愛知県吹奏楽連盟', url: 'https://aiba.cloud/aibaWEB.html, icon: '' },
   { label: '吹奏楽連盟',              url: 'https://www.ajba.or.jp/',         icon: '🎺' },
   // ← ここにリンクを追加してください
   // 例: { label: '楽器店サイト', url: 'https://example.com', icon: '🎸' },
