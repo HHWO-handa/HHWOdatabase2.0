@@ -19,3 +19,4 @@ const ADMIN_PASSWORD = 'hhwo2026'; // ← ここを変更してください
 // Supabase Storage バケット名
 // ============================================================
 const STORAGE_IMAGE_BUCKET = 'instrument-images';
+const STORAGE_REPAIR_BUCKET = 'repair-photos';
