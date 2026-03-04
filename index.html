@@ -27,20 +27,30 @@
 
     <!-- ページタイトルエリア -->
     <div class="page-title-area">
-      <h1 class="page-title" id="pageTitle">楽器一覧</h1>
-      <p class="page-subtitle" id="pageSubtitle">登録された楽器を管理します</p>
+      <div class="page-title-row">
+        <div>
+          <h1 class="page-title" id="pageTitle">楽器一覧</h1>
+          <p class="page-subtitle" id="pageSubtitle">登録された楽器を管理します</p>
+        </div>
+        <!-- 修理登録ボタン（修理ページのみ表示） -->
+        <button class="repair-add-btn" id="repairAddBtn" style="display:none" onclick="openRepairForm(null)">
+          ＋ 修理登録
+        </button>
+      </div>
     </div>
 
     <!-- 検索バー -->
     <div class="search-area">
       <input type="text" class="search-input" id="searchInput" placeholder="検索...">
       <span class="search-icon">🔍</span>
+      <!-- QRスキャンボタン（楽器・修理ページのみ表示） -->
+      <button class="qr-btn" id="qrBtn" style="display:none" onclick="openQrScanner()" title="QRコードで検索">
+        <span>📷</span>
+      </button>
     </div>
 
     <!-- テーブルコンテナ -->
-    <div class="table-container" id="tableContainer">
-      <!-- JSで動的生成 -->
-    </div>
+    <div class="table-container" id="tableContainer"></div>
 
     <!-- 空状態 -->
     <div class="empty-state" id="emptyState" style="display:none;">
@@ -62,7 +72,7 @@
     </button>
     <button class="nav-btn" data-page="repair" onclick="switchPage('repair')">
       <span class="nav-icon">🔧</span>
-      <span class="nav-label">修理楽器</span>
+      <span class="nav-label">修理記録</span>
     </button>
     <button class="nav-btn" data-page="baseball" onclick="switchPage('baseball')">
       <span class="nav-icon">⚾</span>
@@ -109,7 +119,26 @@
     </div>
   </div>
 
+  <!-- QRスキャナーモーダル -->
+  <div class="modal-overlay" id="qrOverlay">
+    <div class="modal qr-modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeQrScanner()">✕</button>
+      <div class="qr-content">
+        <h2 class="qr-title">📷 QRコードをスキャン</h2>
+        <p class="qr-desc">カメラにQRコードをかざしてください</p>
+        <div class="qr-viewport">
+          <video id="qrVideo" playsinline></video>
+          <div class="qr-frame"></div>
+        </div>
+        <p class="qr-status" id="qrStatus">カメラを起動中...</p>
+        <button class="cancel-btn" style="width:100%;margin-top:12px" onclick="closeQrScanner()">キャンセル</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- QRコードスキャナーライブラリ -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
