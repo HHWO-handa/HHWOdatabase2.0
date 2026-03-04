@@ -18,77 +18,104 @@
         <span class="logo-icon">♪</span>
         <span class="logo-text">Music Library</span>
       </div>
-      <button class="admin-btn" id="adminBtn">管理者</button>
+      <div class="header-actions">
+        <button class="admin-btn" id="adminBtn">管理者</button>
+        <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSideMenu()" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
+  <!-- サイドメニューオーバーレイ -->
+  <div class="side-overlay" id="sideOverlay" onclick="closeSideMenu()"></div>
+
+  <!-- サイドメニュー -->
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <span class="side-menu-title">📋 メニュー</span>
+      <button class="side-menu-close" onclick="closeSideMenu()">✕</button>
+    </div>
+    <div class="side-menu-body">
+      <div class="side-section">
+        <div class="side-section-label">📊 統計</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-instruments">—</div>
+            <div class="stat-label">楽器総数</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-scores">—</div>
+            <div class="stat-label">楽譜合計数</div>
+          </div>
+          <div class="stat-card stat-card-full">
+            <div class="stat-value" id="stat-last-score">—</div>
+            <div class="stat-label">楽譜最終番号（scorenumber最大）</div>
+          </div>
+        </div>
+      </div>
+      <div class="side-section">
+        <div class="side-section-label">🔗 リンク集</div>
+        <div id="linksList" class="links-list"></div>
+      </div>
+    </div>
+  </aside>
+
   <!-- メインコンテンツ -->
   <main class="main">
-
-    <!-- ページタイトルエリア -->
     <div class="page-title-area">
       <div class="page-title-row">
         <div>
           <h1 class="page-title" id="pageTitle">楽器一覧</h1>
           <p class="page-subtitle" id="pageSubtitle">登録された楽器を管理します</p>
         </div>
-        <!-- 修理登録ボタン（修理ページのみ表示） -->
         <button class="repair-add-btn" id="repairAddBtn" style="display:none" onclick="openRepairForm(null)">
           ＋ 修理登録
         </button>
       </div>
     </div>
 
-    <!-- 検索バー -->
     <div class="search-area">
       <input type="text" class="search-input" id="searchInput" placeholder="検索...">
       <span class="search-icon">🔍</span>
-      <!-- QRスキャンボタン（楽器・修理ページのみ表示） -->
-      <button class="qr-btn" id="qrBtn" style="display:none" onclick="openQrScanner()" title="QRコードで検索">
+      <button class="qr-btn" id="qrBtn" style="display:none"
+        onclick="openQrScanner('search')" title="QRコードで検索">
         <span>📷</span>
       </button>
     </div>
 
-    <!-- テーブルコンテナ -->
     <div class="table-container" id="tableContainer"></div>
-
-    <!-- 空状態 -->
     <div class="empty-state" id="emptyState" style="display:none;">
       <div class="empty-icon">📭</div>
       <p>データがありません</p>
     </div>
-
   </main>
 
   <!-- ボトムナビゲーション -->
   <nav class="bottom-nav">
     <button class="nav-btn active" data-page="instruments" onclick="switchPage('instruments')">
-      <span class="nav-icon">🎷</span>
-      <span class="nav-label">楽器一覧</span>
+      <span class="nav-icon">🎷</span><span class="nav-label">楽器一覧</span>
     </button>
     <button class="nav-btn" data-page="scores" onclick="switchPage('scores')">
-      <span class="nav-icon">🎵</span>
-      <span class="nav-label">楽譜一覧</span>
+      <span class="nav-icon">🎵</span><span class="nav-label">楽譜一覧</span>
     </button>
     <button class="nav-btn" data-page="repair" onclick="switchPage('repair')">
-      <span class="nav-icon">🔧</span>
-      <span class="nav-label">修理記録</span>
+      <span class="nav-icon">🔧</span><span class="nav-label">修理記録</span>
     </button>
     <button class="nav-btn" data-page="baseball" onclick="switchPage('baseball')">
-      <span class="nav-icon">⚾</span>
-      <span class="nav-label">応援楽譜</span>
+      <span class="nav-icon">⚾</span><span class="nav-label">応援楽譜</span>
     </button>
   </nav>
 
   <!-- 詳細モーダル -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-    <div class="modal" id="modal" onclick="event.stopPropagation()">
+    <div class="modal" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
 
-  <!-- 管理者認証モーダル -->
+  <!-- 管理者認証 -->
   <div class="modal-overlay" id="authOverlay">
     <div class="modal auth-modal" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeAuth()">✕</button>
@@ -96,7 +123,8 @@
         <div class="auth-icon">🔒</div>
         <h2 class="auth-title">管理者認証</h2>
         <p class="auth-desc">パスワードを入力してください</p>
-        <input type="password" class="auth-input" id="authInput" placeholder="パスワード" onkeydown="if(event.key==='Enter')checkAuth()">
+        <input type="password" class="auth-input" id="authInput" placeholder="パスワード"
+          onkeydown="if(event.key==='Enter')checkAuth()">
         <p class="auth-error" id="authError"></p>
         <button class="auth-submit" onclick="checkAuth()">ログイン</button>
       </div>
@@ -111,7 +139,7 @@
     </div>
   </div>
 
-  <!-- 追加/編集フォームモーダル -->
+  <!-- フォームモーダル -->
   <div class="modal-overlay" id="formOverlay">
     <div class="modal form-modal" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeForm()">✕</button>
@@ -119,25 +147,25 @@
     </div>
   </div>
 
-  <!-- QRスキャナーモーダル -->
+  <!-- QRスキャナーモーダル（モード切替対応） -->
   <div class="modal-overlay" id="qrOverlay">
     <div class="modal qr-modal" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeQrScanner()">✕</button>
       <div class="qr-content">
         <h2 class="qr-title">📷 QRコードをスキャン</h2>
-        <p class="qr-desc">カメラにQRコードをかざしてください</p>
+        <p class="qr-desc" id="qrDesc">カメラにQRコードをかざしてください</p>
         <div class="qr-viewport">
           <video id="qrVideo" playsinline></video>
           <div class="qr-frame"></div>
         </div>
         <p class="qr-status" id="qrStatus">カメラを起動中...</p>
-        <button class="cancel-btn" style="width:100%;margin-top:12px" onclick="closeQrScanner()">キャンセル</button>
+        <button class="cancel-btn" style="width:100%;margin-top:12px"
+          onclick="closeQrScanner()">キャンセル</button>
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- QRコードスキャナーライブラリ -->
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
