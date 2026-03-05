@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>音楽ライブラリ管理</title>
+  <title>HHWODataBase</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
     <div class="header-inner">
       <div class="logo">
         <span class="logo-icon">♪</span>
-        <span class="logo-text">Music Library</span>
+        <span class="logo-text">HHWODataBase</span>
       </div>
       <div class="header-actions">
-        <button class="admin-btn" id="adminBtn">管理者</button>
+        <button class="admin-btn" id="adminBtn">編集</button>
         <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSideMenu()" aria-label="メニュー">
           <span></span><span></span><span></span>
         </button>
@@ -33,7 +33,7 @@
   <!-- サイドメニュー -->
   <aside class="side-menu" id="sideMenu">
     <div class="side-menu-header">
-      <span class="side-menu-title">📋 メニュー</span>
+      <span class="side-menu-title">メニュー</span>
       <button class="side-menu-close" onclick="closeSideMenu()">✕</button>
     </div>
     <div class="side-menu-body">
@@ -50,7 +50,7 @@
           </div>
           <div class="stat-card stat-card-full">
             <div class="stat-value" id="stat-last-score">—</div>
-            <div class="stat-label">楽譜最終番号（scorenumber最大）</div>
+            <div class="stat-label">楽譜最終番号</div>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
       <div class="page-title-row">
         <div>
           <h1 class="page-title" id="pageTitle">楽器一覧</h1>
-          <p class="page-subtitle" id="pageSubtitle">登録された楽器を管理します</p>
+          <p class="page-subtitle" id="pageSubtitle">HHWOが所有する楽器を管理します</p>
         </div>
         <button class="repair-add-btn" id="repairAddBtn" style="display:none" onclick="openRepairForm(null)">
           ＋ 修理登録
@@ -103,7 +103,7 @@
       <span class="nav-icon">🔧</span><span class="nav-label">修理記録</span>
     </button>
     <button class="nav-btn" data-page="baseball" onclick="switchPage('baseball')">
-      <span class="nav-icon">⚾</span><span class="nav-label">応援楽譜</span>
+      <span class="nav-icon">⚾</span><span class="nav-label">野球応援</span>
     </button>
   </nav>
 
