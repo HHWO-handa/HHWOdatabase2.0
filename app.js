@@ -6,19 +6,19 @@ let db;
 try {
   db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch(e) {
-  console.warn('Supabase未設定。デモデータで動作します。');
+  console.warn('Supabaseと接続できませんでした。デモデータで動作します。');
 }
 
 // ============================================================
 // デモデータ
 // ============================================================
 const DEMO_INSTRUMENTS = [
-  { id:1, instnumber:103001, qr:'QR-001', instcode:'CL-001', name:'103001 CL-001', maker:'Buffet Crampon', model:'R13', purchase_date:'2020-04-01', owner:'田中 花子', equipcode:'EQ-001', image_url:null, notes:'リードは3番を使用。' },
+  { id:1, instnumber:103001, qr:'QR-001', instcode:'CL-001', name:'正しく起動できませんでした', maker:'Buffet Crampon', model:'R13', purchase_date:'2020-04-01', owner:'田中 花子', equipcode:'EQ-001', image_url:null, notes:'リードは3番を使用。' },
   { id:2, instnumber:104002, qr:'QR-002', instcode:'SAX-001', name:'104002 SAX-001', maker:'Yamaha', model:'YTS-82Z', purchase_date:'2019-09-15', owner:'鈴木 一郎', equipcode:'EQ-002', image_url:null, notes:'定期メンテナンス済み（2023年10月）' },
   { id:3, instnumber:203003, qr:'QR-003', instcode:'TP-001', name:'203003 TP-001', maker:'Bach', model:'Stradivarius 37', purchase_date:'2021-03-20', owner:'佐藤 次郎', equipcode:'EQ-003', image_url:null, notes:'バルブ不調のため修理依頼中。' },
 ];
 const DEMO_SCORES = [
-  { id:1, scorenumber:1, jatitle:'宝島', entitle:'Takarajima', jahititle:'たからじま', composer:'和泉宏隆', artist:'T-SQUARE', hiragana:'た', alphabet:'T', instrumentation:'吹奏楽フルバンド', tags:'ポップス,定番', asyear:null, is_baseball:false, notes:'定期演奏会のメイン曲。' },
+  { id:1, scorenumber:1, jatitle:'正しく起動できませんでした', entitle:'Takarajima', jahititle:'たからじま', composer:'和泉宏隆', artist:'T-SQUARE', hiragana:'た', alphabet:'T', instrumentation:'吹奏楽フルバンド', tags:'ポップス,定番', asyear:null, is_baseball:false, notes:'定期演奏会のメイン曲。' },
   { id:2, scorenumber:2, jatitle:'アルヴァマー序曲', entitle:'Alvamar Overture', jahititle:'あるヴぁまーじょきょく', composer:'James Barnes', artist:'', hiragana:'あ', alphabet:'A', instrumentation:'吹奏楽フルバンド', tags:'コンクール,Classic', asyear:null, is_baseball:false, notes:'コンクールA部門用。' },
   { id:3, scorenumber:3, jatitle:'VICTORY（応援歌）', entitle:'VICTORY', jahititle:'びくとりー', composer:'編曲：山田太郎', artist:'', hiragana:'ひ', alphabet:'V', instrumentation:'吹奏楽', tags:'野球,応援', asyear:null, is_baseball:true, notes:'攻撃時に演奏' },
 ];
@@ -145,8 +145,8 @@ function switchPage(page) {
 // ============================================================
 function renderPage() {
   const titles = {
-    instruments: { title: '楽器一覧',        sub: '登録された楽器を管理します' },
-    scores:      { title: '楽譜一覧',        sub: '演奏楽譜の管理をします' },
+    instruments: { title: '楽器一覧',        sub: '所有する楽器を管理します' },
+    scores:      { title: '楽譜一覧',        sub: '所有する楽譜を管理します' },
     repair:      { title: '修理記録',         sub: '修理・点検の記録を管理します' },
     baseball:    { title: '野球応援楽譜一覧', sub: '野球応援で使用する楽譜' },
   };
@@ -189,7 +189,7 @@ function renderInstrumentsTable(data, query = '') {
         <th>楽器番号</th>
         <th>楽器名</th>
         <th class="hide-mobile">楽器コード</th>
-        <th class="hide-mobile">担当者</th>
+        <th class="hide-mobile">所有元</th>
         <th></th>
       </tr></thead>
       <tbody>
@@ -342,7 +342,7 @@ function openInstrumentDetail(id) {
       <div class="detail-item"><span class="detail-label">QRコード</span><span class="detail-value mono">${esc(item.qr||'-')}</span></div>
       <div class="detail-item"><span class="detail-label">メーカー</span><span class="detail-value">${esc(item.maker||'-')}</span></div>
       <div class="detail-item"><span class="detail-label">モデル</span><span class="detail-value">${esc(item.model||'-')}</span></div>
-      <div class="detail-item"><span class="detail-label">担当者</span><span class="detail-value">${esc(item.owner||'-')}</span></div>
+      <div class="detail-item"><span class="detail-label">所有元</span><span class="detail-value">${esc(item.owner||'-')}</span></div>
       <div class="detail-item"><span class="detail-label">購入日</span><span class="detail-value mono">${formatDate(item.purchase_date)}</span></div>
     </div>
     <div class="detail-item"><span class="detail-label">備考・メモ</span>${noteHtml}</div>`;
@@ -491,7 +491,7 @@ function renderAdminPanel() {
     </div>
     <div class="admin-search-wrap">
       <input type="text" class="admin-search-input"
-        placeholder="検索（Enter または 少し待つと検索）..."
+        placeholder="検索..."
         value="${esc(adminSearchQuery)}"
         id="adminSearchInput"
         oninput="onAdminSearchInput(this.value)"
@@ -598,21 +598,21 @@ function instrumentForm(item) {
           placeholder="例：CL-001" oninput="updateInstName()">
       </div>
       <div class="form-group">
-        <label class="form-label">QRコード</label>
-        <input type="text" class="form-input" id="f_qr" value="${v('qr')}" placeholder="例：QR-001">
+        <label class="form-label">QRコード（自動入力）</label>
+        <input type="text" class="form-input" id="f_qr" value="${v('qr')}" placeholder="">
       </div>
     </div>
 
     <div class="form-group">
       <label class="form-label required">楽器名 <span style="font-size:11px;font-weight:400;color:var(--text-muted)"></span></label>
       <input type="text" class="form-input" id="f_name" value="${v('name')}"
-        placeholder="楽器番号とコード入力で自動入力されます">
+        placeholder="例：フルート5">
     </div>
 
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">メーカー</label>
-        <input type="text" class="form-input" id="f_maker" value="${v('maker')}" placeholder="例：Yamaha">
+        <input type="text" class="form-input" id="f_maker" value="${v('maker')}" placeholder="例：YAMAHA">
       </div>
       <div class="form-group">
         <label class="form-label">モデル</label>
@@ -626,12 +626,18 @@ function instrumentForm(item) {
       </div>
       <div class="form-group">
         <label class="form-label">備品番号</label>
-        <input type="text" class="form-input" id="f_equipcode" value="${v('equipcode')}" placeholder="例：EQ-001">
+        <input type="text" class="form-input" id="f_equipcode" value="${v('equipcode')}" placeholder="例：1234567 1234 1234567">
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">担当者・所有者</label>
-      <input type="text" class="form-input" id="f_owner" value="${v('owner')}" placeholder="例：山田 花子">
+      <select class="form-select" id="f_maker">
+          <option value="">-- 選択 --</option>
+          <option value="学校備品" selected>学校備品</option>
+          <option value="ばらさのグッズ">ばらさのグッズ</option>
+          <option value="寄付・寄贈">寄付・寄贈</option>
+          <option value="その他">その他</option>
+        </select>
     </div>
 
     <div class="form-group">
@@ -784,7 +790,7 @@ function scoreForm(item) {
       </div>
       <div class="form-group">
         <label class="form-label">アルファベット索引</label>
-        <input type="text" class="form-input" id="f_alphabet" value="${v('alphabet')}" placeholder="例：T">
+        <input type="text" class="form-input" id="f_alphabet" value="${v('alphabet')}" placeholder="例：T(半角大文字)">
       </div>
     </div>
     <div class="form-row">
@@ -814,7 +820,7 @@ function scoreForm(item) {
     </div>
     <div class="form-group">
       <label class="form-label">タグ（カンマ区切り）</label>
-      <input type="text" class="form-input" id="f_tags" value="${v('tags')}" placeholder="例：ポップス,定番,コンクール">
+      <input type="text" class="form-input" id="f_tags" value="${v('tags')}" placeholder="例：ポップス,定番,課題曲">
     </div>
     <div class="form-group">
       <label class="form-label">野球応援楽譜</label>
@@ -825,7 +831,7 @@ function scoreForm(item) {
     </div>
     <div class="form-group">
       <label class="form-label">備考・メモ</label>
-      <textarea class="form-textarea" id="f_notes" placeholder="演奏上の注意など...">${v('notes')}</textarea>
+      <textarea class="form-textarea" id="f_notes" placeholder="演奏上の注意、不足楽譜など">${v('notes')}</textarea>
     </div>
     <div class="form-actions">
       <button class="cancel-btn" onclick="closeForm()">キャンセル</button>
