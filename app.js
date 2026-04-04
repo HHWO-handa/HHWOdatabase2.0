@@ -423,7 +423,7 @@ function checkAuth() {
     document.getElementById('authOverlay').classList.remove('open');
     document.getElementById('authInput').value = '';
     document.getElementById('authError').textContent = '';
-    document.getElementById('adminBtn').textContent = '⚙️ 管理者';
+    document.getElementById('adminBtn').textContent = '編集';
     openAdminPanel();
   } else {
     document.getElementById('authError').textContent = 'パスワードが違います';
