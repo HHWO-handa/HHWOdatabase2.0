@@ -311,8 +311,8 @@ function renderRepairsTable(data, query = '') {
               <div style="font-weight:500">#${esc(String(r.instnumber||'-'))}</div>
               <div style="font-size:11px;color:var(--text-muted)">${esc(instName)}</div>
             </td>
-            <td><span class="badge ${REPAIR_STATUS_MAP[r.status]||'badge-storage'}">${esc(r.status||'-')}</span></td>
             <td class="muted hide-mobile">${formatDate(r.repair_date)}</td>
+            <td><span class="badge ${REPAIR_STATUS_MAP[r.status]||'badge-storage'}">${esc(r.status||'-')}</span></td>
             <td class="row-arrow">›</td>
           </tr>`;
         }).join('')}
