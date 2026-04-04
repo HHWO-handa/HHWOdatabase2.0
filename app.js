@@ -291,8 +291,8 @@ function renderRepairsTable(data, query = '') {
     <table class="data-table">
       <thead><tr>
         <th style="width:44px"></th>
-　　　　<th>楽器No.</th><th>状態</th>
-        <th class="hide-mobile">修理日</th><th></th>
+　　　　<th>楽器No.</th><th class="hide-mobile">修理日</th>
+    <th>状態</th><th></th>
       </tr></thead>
       <tbody>
         ${filtered.map(r => {
