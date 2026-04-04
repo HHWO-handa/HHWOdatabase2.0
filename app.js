@@ -307,8 +307,7 @@ function renderRepairsTable(data, query = '') {
               ${imgUrl
                 ? `<img src="${esc(imgUrl)}" class="row-thumb" onerror="this.style.display='none'">`
                 : `<div class="row-thumb-placeholder">🔧</div>`}
-            </td>
-            <td style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">${esc(r.repair_id||'')}</td>
+             //<td style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">${esc(r.repair_id||'')}</td>
             <td>
               <div style="font-weight:500">#${esc(String(r.instnumber||'-'))}</div>
               <div style="font-size:11px;color:var(--text-muted)">${esc(instName)}</div>
