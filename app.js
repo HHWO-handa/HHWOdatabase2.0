@@ -755,7 +755,7 @@ function scoreForm(item) {
     <input type="hidden" id="formId" value="${item ? item.id : ''}">
     <div class="form-group">
       <label class="form-label required">楽譜番号</label>
-      <input type="number" class="form-input" id="f_scorenumber" value="${v('scorenumber')}" placeholder="例：1">
+      <input type="number" class="form-input" id="f_scorenumber" value="${v('scorenumber')}" placeholder="例：10001">
     </div>
     <div class="form-group">
       <label class="form-label required">曲名（日本語）</label>
@@ -763,7 +763,7 @@ function scoreForm(item) {
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label required">曲名（英語）</label>
+        <label class="form-label">曲名（英語）</label>
         <input type="text" class="form-input" id="f_entitle" value="${v('entitle')}" placeholder="例：Takarajima">
       </div>
       <div class="form-group">
@@ -783,18 +783,18 @@ function scoreForm(item) {
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">50音索引</label>
+        <label class="form-label required">50音索引</label>
         <input type="text" class="form-input" id="f_hiragana" value="${v('hiragana')}" placeholder="例：た">
       </div>
-      <div class="form-group">
+      <div class="form-label required">
         <label class="form-label">アルファベット索引</label>
         <input type="text" class="form-input" id="f_alphabet" value="${v('alphabet')}" placeholder="例：T(半角大文字)">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">楽器編成</label>
-        <select class="form-select" id="f_maker">
+        <label class="form-label required">楽器編成</label>
+        <select class="form-select" id="f_instrumation">
           <option value="">-- 選択 --</option>
           <option value="吹奏楽" selected>吹奏楽</option>
           <option value="木管">木管</option>
