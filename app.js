@@ -794,7 +794,7 @@ function scoreForm(item) {
     <div class="form-row">
       <div class="form-group">
         <label class="form-label required">楽器編成</label>
-        <select class="form-select" id="f_instrumation">
+        <select class="form-select" id="f_instrumentation">
           <option value="">-- 選択 --</option>
           <option value="吹奏楽" selected>吹奏楽</option>
           <option value="木管">木管</option>
