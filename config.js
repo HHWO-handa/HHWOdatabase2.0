@@ -27,6 +27,7 @@ const STORAGE_REPAIR_BUCKET = 'repair-photos';
 const LINKS = [
   { label: 'HHWOホームページ', url: 'https://hhwo2023.1web.jp/', icon: '' },
   { label: 'コラール音源', url: 'https://www.youtube.com/playlist?list=PLzMeKBDEBKDpUhHLUaIuEhv0WsFJNK6LQ',icon: '📚' },
+  { label: '野球応援音源', url: 'https://www.youtube.com/playlist?list=PLzMeKBDEBKDozc8Bgqr4im4ZigVbc8thv', icon: '⚾' },
   { label: '愛知県吹奏楽連盟', url: 'https://aiba.cloud/aibaWEB.html', icon: '' },
   { label: '吹奏楽連盟',url: 'https://www.ajba.or.jp/',         icon: '🎺' },
   // ← ここにリンクを追加してください
