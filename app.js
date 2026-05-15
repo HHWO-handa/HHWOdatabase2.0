@@ -282,12 +282,12 @@ function renderScoresTable(data, query = '', filterCat = '', filterVal = '') {
 // 修理テーブル描画（サムネイル付き）
 // ============================================================
 const REPAIR_STATUS_MAP = {
-  '破損による修理':   'badge-repair',
-  '違和感による修理': 'badge-warn',
-  '原因不明の問題':   'badge-unknown',
-  'その他修理':       'badge-storage',
-  '定期点検':         'badge-check',
-  'その他':           'badge-storage',
+  '修理':   'repair',
+  '点検': 'check',
+  '他校貸出':   'rental',
+  '利用不可':       'unavailable',
+  '処分予定・済':         'disposal',
+  'その他':           'other',
 };
 
 function renderRepairsTable(data, query = '') {
@@ -781,7 +781,7 @@ function scoreForm(item) {
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label required">曲名（英語）</label>
+        <label class="form-label">曲名（英語）</label>
         <input type="text" class="form-input" id="f_entitle" value="${v('entitle')}" placeholder="例：Takarajima">
       </div>
       <div class="form-group">
@@ -866,7 +866,7 @@ function repairForm(item) {
       #${String(i.instnumber).padStart(6,'0')} ${esc(i.name||'')}
     </option>`
   ).join('');
-  const statusOptions = ['破損による修理','違和感による修理','原因不明の問題','その他修理','定期点検','その他']
+  const statusOptions = ['修理','点検','他校貸出','利用不可','処分予定・済','その他']
     .map(s => `<option value="${s}" ${item?.status === s ? 'selected' : ''}>${s}</option>`).join('');
 
   return `
@@ -934,7 +934,7 @@ function repairForm(item) {
 
     <div class="form-group">
       <label class="form-label">修理内容・備考</label>
-      <textarea class="form-textarea" id="f_repair_content" placeholder="症状や修理内容を記述...">${v('repair_content')}</textarea>
+      <textarea class="form-textarea" id="f_repair_content" placeholder="修理内容や貸出先を記述...">${v('repair_content')}</textarea>
     </div>
 
     <div class="form-actions">
@@ -1046,7 +1046,6 @@ async function saveScore() {
   const jahititle = document.getElementById('f_jahititle').value.trim();
   if (!scorenumber) { alert('楽譜番号は必須です'); return; }
   if (!jatitle) { alert('曲名（日本語）は必須です'); return; }
-  if (!entitle) { alert('曲名（英語）は必須です'); return; }
   if (!jahititle) { alert('曲名（ひらがな）は必須です'); return; }
   const data = {
     scorenumber, jatitle, entitle, jahititle,
