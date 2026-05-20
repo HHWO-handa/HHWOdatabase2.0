@@ -13,7 +13,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // ============================================================
 // ※ 本番環境ではサーバーサイドで認証することを推奨します
 // GitHub Pages のような静的サイトでは簡易認証として利用
-const ADMIN_PASSWORD = 'hhwo2026'; // ← ここを変更してください
+const ADMIN_PASSWORD = 'hhwo79&80'; // ← ここを変更してください
 
 // ============================================================
 // Supabase Storage バケット名
